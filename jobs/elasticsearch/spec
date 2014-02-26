@@ -1,0 +1,13 @@
+---
+name: elasticsearch
+packages: []
+templates:
+  bin/monit_debugger: bin/monit_debugger
+  bin/elasticsearch_ctl: bin/elasticsearch_ctl
+  config/elasticsearch.conf.erb: config/elasticsearch.conf
+  data/properties.sh.erb: data/properties.sh
+  helpers/ctl_setup.sh: helpers/ctl_setup.sh
+  helpers/ctl_utils.sh: helpers/ctl_utils.sh
+properties:
+  elasticsearch.leader_address:
+    description: Hostname/IP to the leader/master of the cluster
