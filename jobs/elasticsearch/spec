@@ -1,6 +1,8 @@
 ---
 name: elasticsearch
-packages: []
+packages:
+  - elasticsearch
+  - java7
 templates:
   bin/monit_debugger: bin/monit_debugger
   bin/elasticsearch_ctl: bin/elasticsearch_ctl
@@ -9,5 +11,3 @@ templates:
   helpers/ctl_setup.sh: helpers/ctl_setup.sh
   helpers/ctl_utils.sh: helpers/ctl_utils.sh
 properties:
-  elasticsearch.leader_address:
-    description: Hostname/IP to the leader/master of the cluster

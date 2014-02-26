@@ -1,0 +1,11 @@
+# abort script on any command that exit with a non zero value
+set -e
+
+version="1.0.1"
+
+# Elasticsearch binary Unix build
+tar zxvf elasticsearch/elasticsearch-1.0.1.tar.gz
+(
+  cd elasticsearch-1.0.1
+  cp -a * $BOSH_INSTALL_TARGET
+)

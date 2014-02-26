@@ -77,5 +77,6 @@ do
 done
 
 PIDFILE=$RUN_DIR/$JOB_NAME.pid
+CONFIGFILE=/var/vcap/jobs/elasticsearch/config/elasticsearch.conf
 
 echo '$PATH' $PATH
