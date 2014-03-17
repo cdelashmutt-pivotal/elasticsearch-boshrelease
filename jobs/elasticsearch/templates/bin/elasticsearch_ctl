@@ -9,23 +9,24 @@ source /var/vcap/jobs/elasticsearch/helpers/ctl_setup.sh 'elasticsearch'
 export PORT=${PORT:-5000}
 export LANG=en_US.UTF-8
 
+CONFIGFILE=/var/vcap/jobs/elasticsearch/config/elasticsearch.yml
+
 case $1 in
 
   start)
-    pid_guard $PIDFILE $JOB_NAME
+    pid_guard $JAVA_PIDFILE $PIDFILE $JOB_NAME
 
-    # TODO: Run some process
-    exec chpst -u vcap:vcap elasticsearch -Des.config=$CONFIGFILE \
-         >>$LOG_DIR/$JOB_NAME.stdout.log \
-         2>>$LOG_DIR/$JOB_NAME.stderr.log
+    echo $$ > $PIDFILE
+    elasticsearch -d -p $PIDFILE -Des.config=$CONFIGFILE
 
-    # store pid in $PIDFILE
-    echo $! > $PIDFILE
+    sleep 5
+    JAVA_PID=`ps -ef | awk '/java/{ print $2 }'`
+    echo $JAVA_PID > $JAVA_PIDFILE
     ;;
 
   stop)
     kill_and_wait $PIDFILE
-
+    kill_and_wait $JAVA_PIDFILE
     ;;
   *)
     echo "Usage: elasticsearch_ctl {start|stop}"
