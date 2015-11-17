@@ -15,7 +15,7 @@ case $1 in
   start)
     pid_guard $PIDFILE $JOB_NAME
 
-    elasticsearch -d -p $PIDFILE
+    sudo -u vcap -g vcap elasticsearch -d -p $PIDFILE
     ;;
 
   stop)
