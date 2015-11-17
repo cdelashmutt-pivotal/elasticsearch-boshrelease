@@ -17,5 +17,5 @@ tar zxvf elasticsearch/elasticsearch-$version.tar.gz
 
   # create empty plugins directory and scripts directory
   mkdir -p $BOSH_INSTALL_TARGET/plugins
-  mkdir -p /var/vcap/jobs/elasticsearch/config/scripts
+  mkdir /var/vcap/jobs/elasticsearch/config/scripts
 )
