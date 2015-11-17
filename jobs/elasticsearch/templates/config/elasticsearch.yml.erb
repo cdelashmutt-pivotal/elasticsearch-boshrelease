@@ -3,3 +3,5 @@ path:
   data: /var/vcap/store/elasticsearch
 node.name: <%= name %>/<%= index %>
 network.host: _non_loopback_
+discovery.zen.ping.multicast.enabled: false
+<% if_p("leader_address") do |leader_address| %>discovery.zen.ping.unicast.hosts: <%= leader_address %><% end %>
