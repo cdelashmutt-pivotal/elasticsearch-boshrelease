@@ -1,5 +1,6 @@
 check process elasticsearch
   with pidfile /var/vcap/sys/run/elasticsearch/elasticsearch.pid
+  as uid 'vcap'
+  as gid 'vcap'
   start program "/var/vcap/jobs/elasticsearch/bin/monit_debugger elasticsearch_ctl '/var/vcap/jobs/elasticsearch/bin/elasticsearch_ctl start'"
   stop program "/var/vcap/jobs/elasticsearch/bin/monit_debugger elasticsearch_ctl '/var/vcap/jobs/elasticsearch/bin/elasticsearch_ctl stop'"
-  group vcap
