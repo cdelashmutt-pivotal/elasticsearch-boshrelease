@@ -19,8 +19,8 @@ fi
 echo "Extracting archive..."
 tar xzf $archive
 
-if [[ -d openjdk-1.8.0_65/bin && `openjdk-1.8.0_65/bin/java -version 2>&1` =~ "Java HotSpot" && $? == 0 ]]; then
-  cp -a openjdk-1.8.0_65/* ${BOSH_INSTALL_TARGET}
+if [[ -d bin && `bin/java -version 2>&1` =~ "OpenJDK Runtime" && $? == 0 ]]; then
+  cp -a * ${BOSH_INSTALL_TARGET}
 else
   echo "JVM is not properly packaged"
   exit 1
