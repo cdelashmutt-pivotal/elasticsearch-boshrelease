@@ -14,10 +14,6 @@ case $1 in
 
   start)
     pid_guard $PIDFILE $JOB_NAME
-    if [[ ! -d /var/vcap/sys/logs/elasticsearch ]] ; then
-      mkdir -p /var/vcap/sys/logs/elasticsearch
-    fi
-    chown vcap:vcap /var/vcap/sys/logs/elasticsearch
     
     sudo -u vcap -g vcap elasticsearch -d -p $PIDFILE
     ;;
