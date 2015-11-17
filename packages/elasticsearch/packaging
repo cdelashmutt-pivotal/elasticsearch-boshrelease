@@ -15,6 +15,7 @@ tar zxvf elasticsearch/elasticsearch-$version.tar.gz
   # Link the config directory for the job into the package
   ln -s /var/vcap/jobs/elasticsearch/config $BOSH_INSTALL_TARGET/config
 
+  # create empty plugins directory and scripts directory
   mkdir -p $BOSH_INSTALL_TARGET/plugins
-  mkdir $BOSH_INSTALL_TARGET/config/scripts
+  mkdir -p /var/vcap/jobs/elasticsearch/config/scripts
 )
