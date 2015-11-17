@@ -8,6 +8,7 @@ templates:
   bin/elasticsearch_ctl: bin/elasticsearch_ctl
   config/elasticsearch.yml.erb: config/elasticsearch.yml
   config/logging.yml: config/logging.yml
+  config/scripts/README.md: config/scripts/README.md
   data/properties.sh.erb: data/properties.sh
   helpers/ctl_setup.sh: helpers/ctl_setup.sh
   helpers/ctl_utils.sh: helpers/ctl_utils.sh
