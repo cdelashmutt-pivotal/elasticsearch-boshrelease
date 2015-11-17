@@ -7,5 +7,11 @@ version="2.0.0"
 tar zxvf elasticsearch/elasticsearch-$version.tar.gz
 (
   cd elasticsearch-$version
+  # Remove the default config directory from the extracted archive contents
+  rm -rf config
+
   cp -a * $BOSH_INSTALL_TARGET
+
+  # Link the config directory for the job into the package
+  ln -s /var/vcap/jobs/elasticsearch/config $BOSH_INSTALL_TARGET/config
 )
