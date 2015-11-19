@@ -30,10 +30,7 @@ jobs:
     instances: 0
     resource_pool: small_z1
     networks: (( merge ))
-    properties:
-      leader_address: (( merge ))
-      other_nodes: (( merge ))
 
 networks: (( merge ))
 
-properties: {}
+properties: (( merge ))

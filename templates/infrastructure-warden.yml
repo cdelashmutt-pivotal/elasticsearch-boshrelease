@@ -31,9 +31,6 @@ jobs:
     networks:
       - name: (( meta.network_name ))
         static_ips: ~
-    properties:
-      leader_address: (( jobs.elasticsearch_leader_z1.networks.elasticsearch1.static_ips.[0] ))
-      other_nodes: (( jobs.elasticsearch_z1.networks.[0].static_ips ))
 
 compilation:
   cloud_properties:
@@ -115,3 +112,6 @@ networks:
     reserved:
     - 10.244.2.37
     static: []
+properties:
+  leader_address: (( jobs.elasticsearch_leader_z1.networks.elasticsearch1.static_ips.[0] ))
+  other_nodes: (( jobs.elasticsearch_z1.networks.[0].static_ips ))
