@@ -1,0 +1,5 @@
+---
+name: smoke-tests
+templates:
+  bin/run.erb: bin/run
+packages:

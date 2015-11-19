@@ -22,10 +22,18 @@ jobs:
     instances: 2
     networks:
       - name: (( meta.network_name ))
-        static_ips: ~
+        static_ips: (( static_ips(1,2) ))
     properties:
       elasticsearch:
         leader_address: (( jobs.elasticsearch_leader_z1.networks.elasticsearch1.static_ips.[0] ))
+  - name: smoke-tests
+    instances: 1
+    networks:
+      - name: (( meta.network_name ))
+        static_ips: ~
+    properties:
+      leader_address: (( jobs.elasticsearch_leader_z1.networks.elasticsearch1.static_ips.[0] ))
+      other_nodes: (( jobs.elasticsearch_z1.networks.[0].static_ips ))
 
 compilation:
   cloud_properties:
@@ -54,13 +62,15 @@ networks:
     range: 10.244.2.4/30
     reserved:
     - 10.244.2.5
-    static: []
+    static: 
+    - 10.244.2.6
   - cloud_properties:
       name: random
     range: 10.244.2.8/30
     reserved:
     - 10.244.2.9
-    static: []
+    static: 
+    - 10.244.2.10
   - cloud_properties:
       name: random
     range: 10.244.2.12/30

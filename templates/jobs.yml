@@ -24,6 +24,14 @@ jobs:
     properties:
       elasticsearch:
         leader_address: (( merge ))
+  - name: smoke-tests
+    template: smoke-tests
+    instances: 1
+    resource_pool: small_z1
+    networks: (( merge ))
+    properties:
+      leader_address: (( merge ))
+      other_nodes: (( merge ))
 
 networks: (( merge ))
 

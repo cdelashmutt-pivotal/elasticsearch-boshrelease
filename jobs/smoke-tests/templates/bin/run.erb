@@ -1,0 +1,49 @@
+#!/bin/bash
+
+set -eux
+
+function curl_with_status_code() {
+  OUTPUT_TMP_FILE=/tmp/bootstrap-errand-output
+  touch "${OUTPUT_TMP_FILE}"
+  STATUS_CODE="$(curl -s \
+    --output ${OUTPUT_TMP_FILE} \
+    --write-out "%{http_code}" \
+    "$@")"
+
+  if [[ ${STATUS_CODE} != 20* ]]; then
+    echo "Non-200 response: $(cat ${OUTPUT_TMP_FILE})"
+    cat "${OUTPUT_TMP_FILE}"
+    rm "${OUTPUT_TMP_FILE}"
+    exit 1
+  else
+    cat "${OUTPUT_TMP_FILE}"
+    rm "${OUTPUT_TMP_FILE}"
+  fi
+}
+
+function ensure_endpoint_exists() {
+  STATUS_CODE="$(curl -s \
+    --output /dev/null \
+    --write-out "%{http_code}" \
+    "$@")"
+
+  if [[ ${STATUS_CODE} == 404 ]]; then
+    echo "Expected endpoint $@ to exist"
+    exit 1
+  elif [[ ${STATUS_CODE} == 500 ]]; then
+    echo "Internal server error -- no worries, we will quit and keep moving"
+  else
+    echo "Endpoint $@ found"
+  fi
+
+}
+ES_REST_PORT=9200
+
+<% p('other_nodes').concat(p('leader_address')).each do |ip| %>
+  ES_IP="<%= ip %>"
+
+  ensure_endpoint_exists ${ES_IP}:${ES_REST_PORT}
+  echo "$ES_IP has root endpoint"
+  curl_with_status_code ${ES_IP}:${ES_REST_PORT}
+
+<% end %>
