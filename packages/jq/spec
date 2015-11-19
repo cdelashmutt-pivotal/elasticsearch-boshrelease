@@ -4,4 +4,4 @@ name: jq
 dependencies:
 
 files:
-- src/jq/jq
+- jq/jq
