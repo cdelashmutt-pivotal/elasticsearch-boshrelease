@@ -37,13 +37,21 @@ function ensure_endpoint_exists() {
   fi
 
 }
+
+function check_es_rest_endpoint() {
+
+  ensure_endpoint_exists $@
+  echo "Found root endpoint for $@"
+  curl_with_status_code $@
+
+}
+
 ES_REST_PORT=9200
 
-<% p('other_nodes').concat(p('leader_address')).each do |ip| %>
+ES_IP="<$= p('leader_address') %>"
+check_es_rest_endpoint ${ES_IP}:${ES_REST_PORT}
+
+<% p('other_nodes').each do |ip| %>
   ES_IP="<%= ip %>"
-
-  ensure_endpoint_exists ${ES_IP}:${ES_REST_PORT}
-  echo "$ES_IP has root endpoint"
-  curl_with_status_code ${ES_IP}:${ES_REST_PORT}
-
+  check_es_rest_endpoint ${ES_IP}:${ES_REST_PORT}
 <% end %>
