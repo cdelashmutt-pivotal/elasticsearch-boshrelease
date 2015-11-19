@@ -3,3 +3,9 @@ name: smoke-tests
 templates:
   bin/run.erb: bin/run
 packages:
+  - jq
+propeties:
+  leader_address:
+    description: The address of the leader node
+  other_nodes:
+    description: The addresses of the other nodes in the cluster
