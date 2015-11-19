@@ -48,10 +48,10 @@ function check_es_rest_endpoint() {
 
 ES_REST_PORT=9200
 
-ES_IP=<$= p('leader_address') %>
+ES_IP="<$= p("leader_address") %>"
 check_es_rest_endpoint ${ES_IP}:${ES_REST_PORT}
 
-<% p('other_nodes').each do |ip| %>
+<% p("other_nodes").each do |ip| %>
   ES_IP=<%= ip %>
   check_es_rest_endpoint ${ES_IP}:${ES_REST_PORT}
 <% end %>
